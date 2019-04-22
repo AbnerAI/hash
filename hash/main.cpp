@@ -1,52 +1,52 @@
 /*
-author:abner_albert@163.com
+author:cuixiangchn@163.com
 */
 #include <stdio.h>
 #include <string>
 #include <iostream>
 using namespace std;
 #define HashMax 100
-//ÉùÃ÷
+//å£°æ˜
 int Myhash(int x);
 int initialHashTable(int i, int key, string value);
 void showHash(int c);
 int addHash(int i, int addKey, string addValue);
 int deleteHash(int i, int delKey);
 void updateHash(int i, int key, string value);
-//½¨Á¢Ó³Éä±í
+//å»ºç«‹æ˜ å°„è¡¨
 typedef struct MyMap
 {
 	int key;
 	string value;
 }MapTable;
 
-//½¨Á¢Hash±í
+//å»ºç«‹Hashè¡¨
 typedef struct MyHash
 {
 	string value;
 }HashTable;
-//³õÊ¼»¯MapTable
+//åˆå§‹åŒ–MapTable
 MapTable Map[HashMax];
-//³õÊ¼»¯HashTable
+//åˆå§‹åŒ–HashTable
 MyHash Hash[HashMax*2+1];
 
 void main()
 {
-	int select;//²éÕÒÊäÈë
-	int i = 0;//¼ÆÊıÆ÷ 
+	int select;//æŸ¥æ‰¾è¾“å…¥
+	int i = 0;//è®¡æ•°å™¨ 
 	int addKey,delKey,updateKey;
 	string addValue,updateValue;
-	i = initialHashTable(i, 2, "ÕÅÈı");
-	i = initialHashTable(i, 5, "ÀîË¼");
-	i = initialHashTable(i, 7, "Ğ¡Ã÷");
+	i = initialHashTable(i, 2, "å¼ ä¸‰");
+	i = initialHashTable(i, 5, "ææ€");
+	i = initialHashTable(i, 7, "å°æ˜");
 	while (true)
 	{
-		printf("---¼òÒ×°æHash---\n");
-		printf("1.²é¿´ËùÓĞÓ³Éä±íºÍ¶ÔÓ¦µÄHashµØÖ·\n");
-		printf("2.Ôö¼ÓÒ»×éÓ³ÉäºÍHash¼ÇÂ¼\n");
-		printf("3.É¾³ıÒ»×éÓ³ÉäºÍHash¼ÇÂ¼\n");
-		printf("4.Í¨¹ıkeyĞŞ¸Ä¶ÔÓ¦µØÖ·µÄÖµ\n");
-		printf("ÇëÊäÈëÑ¡Ïî:");
+		printf("---ç®€æ˜“ç‰ˆHash---\n");
+		printf("1.æŸ¥çœ‹æ‰€æœ‰æ˜ å°„è¡¨å’Œå¯¹åº”çš„Hashåœ°å€\n");
+		printf("2.å¢åŠ ä¸€ç»„æ˜ å°„å’ŒHashè®°å½•\n");
+		printf("3.åˆ é™¤ä¸€ç»„æ˜ å°„å’ŒHashè®°å½•\n");
+		printf("4.é€šè¿‡keyä¿®æ”¹å¯¹åº”åœ°å€çš„å€¼\n");
+		printf("è¯·è¾“å…¥é€‰é¡¹:");
 		scanf_s("%d", &select);
 		switch (select)
 		{
@@ -54,34 +54,34 @@ void main()
 			showHash(i);
 			break;
 		case 2:
-			printf("ÊäÈëkeyºÍvalue:");
+			printf("è¾“å…¥keyå’Œvalue:");
 			cin >> addKey;
 			cin >> addValue;
 			i =addHash(i, addKey, addValue);
 			break;
 		case 3:
-			printf("ÊäÈëÒªÉ¾³ıµÄ¼üÖµ¶Ôkey:");
+			printf("è¾“å…¥è¦åˆ é™¤çš„é”®å€¼å¯¹key:");
 			cin >> delKey;
 			i = deleteHash(i, delKey);
 			break;
 		case 4:
-			printf("ÇëÊäÈëkeyºÍ¸üĞÂµÄvalue:");
+			printf("è¯·è¾“å…¥keyå’Œæ›´æ–°çš„value:");
 			cin >> updateKey;
 			cin >> updateValue;
 			updateHash(i, updateKey, updateValue);
 			break;
 		default:
-			printf("ÊäÈëÓĞÎó");
+			printf("è¾“å…¥æœ‰è¯¯");
 			break;
 		}
 	}
 }
-//Hashº¯Êı
+//Hashå‡½æ•°
 int Myhash(int x)
 {
 	return x * 2 + 1;
 }
-//³õÊ¼»¯Hash±í ºÍ »ù±¾Ó³Éä±í
+//åˆå§‹åŒ–Hashè¡¨ å’Œ åŸºæœ¬æ˜ å°„è¡¨
 int initialHashTable(int i,int key,string value)
 {
 	Map[i].value = value;
@@ -89,15 +89,15 @@ int initialHashTable(int i,int key,string value)
 	Hash[Myhash(Map[i].key)].value = Map[i].value;
 	return ++i;
 }
-//²é¿´ËùÓĞÓ³Éä±íºÍ¶ÔÓ¦µÄHashµØÖ·
+//æŸ¥çœ‹æ‰€æœ‰æ˜ å°„è¡¨å’Œå¯¹åº”çš„Hashåœ°å€
 void showHash(int c)
 {
 	system("cls");
 	int j;
 	for (j = 0; j < c; j++)
 	{
-		//printf("µØÖ·£º%d Öµ:%s\n", Hash[j].key,Hash[j].value);
-		cout <<"keyÊÇ£º"<<Map[j].key <<"µØÖ·£º"<< Myhash(Map[j].key) <<"ÖµÎª£º"<< Hash[Myhash(Map[j].key)].value<<endl;
+		//printf("åœ°å€ï¼š%d å€¼:%s\n", Hash[j].key,Hash[j].value);
+		cout <<"keyæ˜¯ï¼š"<<Map[j].key <<"åœ°å€ï¼š"<< Myhash(Map[j].key) <<"å€¼ä¸ºï¼š"<< Hash[Myhash(Map[j].key)].value<<endl;
 	}
 }
 int addHash(int i,int addKey,string addValue) {
@@ -108,19 +108,19 @@ int addHash(int i,int addKey,string addValue) {
 }
 int deleteHash(int i,int delKey)
 {
-	//ĞèÒª´ÓÓ³Éä±íºÍHash±íÖĞÈ«²¿É¾³ı
-	//Ê×ÏÈ²éÑ¯HashµØÖ·
+	//éœ€è¦ä»æ˜ å°„è¡¨å’ŒHashè¡¨ä¸­å…¨éƒ¨åˆ é™¤
+	//é¦–å…ˆæŸ¥è¯¢Hashåœ°å€
 	int position = Myhash(delKey);
-	//Çå³ı¶ÔÓ¦Hash±íµÄÊı¾İ
-	Hash[position].value = "ÒÑ¾­±»Ïú»Ù";//ÎªÁË¼òµ¥Æğ¼û£¬¾ÍÕâÑù¼òµ¥±íÊ¾Ò»ÏÂ
-	//Çå³ıÓ³Éä±íĞÅÏ¢
+	//æ¸…é™¤å¯¹åº”Hashè¡¨çš„æ•°æ®
+	Hash[position].value = "å·²ç»è¢«é”€æ¯";//ä¸ºäº†ç®€å•èµ·è§ï¼Œå°±è¿™æ ·ç®€å•è¡¨ç¤ºä¸€ä¸‹
+	//æ¸…é™¤æ˜ å°„è¡¨ä¿¡æ¯
 	int  j = 0;
 	for ( j; j < i; j++)
 	{
 		if (Map[j].key==delKey)
 		{
 		//	Map[j].key = -1;
-			Map[j].value = "ÒÑ¾­±»Ïú»Ù";
+			Map[j].value = "å·²ç»è¢«é”€æ¯";
 			break;
 		}
 	}
